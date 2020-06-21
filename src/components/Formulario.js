@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from 'react';
-import uuid from 'uuid/dist/v4'
+import uuid from 'uuid/dist/v4';
+// forma de documentar un proyecto
+import PropTypes from 'prop-types';
 
 
 const Formulario = ({crearCita}) => {
@@ -143,6 +145,13 @@ const Formulario = ({crearCita}) => {
         </Fragment>
 
      );
+}
+
+
+
+Formulario.propTypes = {
+    // le indicamo que formulario recibe la funcion de crearcita y es obligatorio
+    crearCita : PropTypes.func.isRequired
 }
  
 export default Formulario;

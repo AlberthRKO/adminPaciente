@@ -5,14 +5,36 @@ import Cita from './components/Cita';
 
 
 function App() {
-  
+
+  // Citas en localStorage
+  // obtenemos la cita y si no hay nada comenzara con un arreglo vacio
+  // parseamos el arreglo yta q solo lee strings
+  let citasIniciales = JSON.parse(localStorage.getItem('citas'))
+  if (!citasIniciales) {
+    citasIniciales = [];
+  }
+
+
+
 
   //creamos el arreglo de citas que se visualizaran cuando guarde
-
-  const [citas, guardarCitas] = useState([])
+  // como en el local storage empieza vacio se le pasa al listado de citas y si ya vienen con un valor ..comenzara desde ahi
+  const [citas, guardarCitas] = useState(citasIniciales)
 
 
   // use effect para realizar ciertas operaciones cuando el state cambia
+  useEffect( () => {
+    // cuando el state este por cambiar guardara la cita anterior
+    // en caso que haiga una cita.. le pasamos al localStorage
+    if (citasIniciales) {
+      localStorage.setItem('citas' , JSON.stringify(citas))
+    }
+    // si no hay ..le pasamo un vacio
+    else{
+      localStorage.setItem('citas', JSON.stringify([]))
+    }
+    // al tener citas como depencia cunado vea un cambio pondra ese valor en localStorage
+  }, [citas, citasIniciales])
 
 
   // funcion que tomara las citas actuales y agrege la nueva
